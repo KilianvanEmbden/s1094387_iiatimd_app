@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "288798275827",
+    "project_id": "character-creator-ec4af",
+    "storage_bucket": "character-creator-ec4af.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:288798275827:android:3c6fe4870fcf4602451f86",
+        "android_client_info": {
+          "package_name": "com.mycompany.dungeonsanddragons"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "288798275827-j5ttihc8i4ot5i1ijtvk2vhoosbbvu42.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mycompany.dungeonsanddragons",
+            "certificate_hash": "9bbb3186b2189ef16d8f272bdab59362c395cbb4"
+          }
+        },
+        {
+          "client_id": "288798275827-k596esgfpjol3s68bqbmhaa4iqu0n7a5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCQm9xFNVFhHyeDkvRgDIYjpIWsrMbpujY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "288798275827-k596esgfpjol3s68bqbmhaa4iqu0n7a5.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "288798275827-l9pd9eid2lr8p2c1asdldo9b3jftg57m.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.mycompany.dungeonsanddragons"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
