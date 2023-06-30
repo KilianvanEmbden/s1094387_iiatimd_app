@@ -76,16 +76,14 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       initialLocation: '/',
       debugLogDiagnostics: true,
       refreshListenable: appStateNotifier,
-      errorBuilder: (context, state) => appStateNotifier.loggedIn
-          ? HomePageWidget()
-          : AuthenticateSoloAltWidget(),
+      errorBuilder: (context, state) =>
+          appStateNotifier.loggedIn ? HomePageWidget() : Auth1Widget(),
       routes: [
         FFRoute(
           name: '_initialize',
           path: '/',
-          builder: (context, _) => appStateNotifier.loggedIn
-              ? HomePageWidget()
-              : AuthenticateSoloAltWidget(),
+          builder: (context, _) =>
+              appStateNotifier.loggedIn ? HomePageWidget() : Auth1Widget(),
         ),
         FFRoute(
           name: 'HomePage',
@@ -123,9 +121,9 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           ),
         ),
         FFRoute(
-          name: 'AuthenticateSoloAlt',
-          path: '/authenticateSoloAlt',
-          builder: (context, params) => AuthenticateSoloAltWidget(),
+          name: 'Auth1',
+          path: '/auth1',
+          builder: (context, params) => Auth1Widget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
@@ -292,7 +290,7 @@ class FFRoute {
 
           if (requireAuth && !appStateNotifier.loggedIn) {
             appStateNotifier.setRedirectLocationIfUnset(state.location);
-            return '/authenticateSoloAlt';
+            return '/auth1';
           }
           return null;
         },

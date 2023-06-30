@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import 'package:collection/collection.dart';
+
 import '/backend/schema/util/firestore_util.dart';
 import '/backend/schema/util/schema_util.dart';
 
@@ -114,4 +116,32 @@ Map<String, dynamic> createUserCharactersRecordData({
   );
 
   return firestoreData;
+}
+
+class UserCharactersRecordDocumentEquality
+    implements Equality<UserCharactersRecord> {
+  const UserCharactersRecordDocumentEquality();
+
+  @override
+  bool equals(UserCharactersRecord? e1, UserCharactersRecord? e2) {
+    return e1?.uid == e2?.uid &&
+        e1?.characterName == e2?.characterName &&
+        e1?.characterRace == e2?.characterRace &&
+        e1?.characterClass == e2?.characterClass &&
+        e1?.characterStrength == e2?.characterStrength &&
+        e1?.characterDexterity == e2?.characterDexterity;
+  }
+
+  @override
+  int hash(UserCharactersRecord? e) => const ListEquality().hash([
+        e?.uid,
+        e?.characterName,
+        e?.characterRace,
+        e?.characterClass,
+        e?.characterStrength,
+        e?.characterDexterity
+      ]);
+
+  @override
+  bool isValidKey(Object? o) => o is UserCharactersRecord;
 }

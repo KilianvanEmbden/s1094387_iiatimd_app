@@ -5,6 +5,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
+import '/flutter_flow/upload_data.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -241,371 +242,467 @@ class _CreateCharacterWidgetState extends State<CreateCharacterWidget> {
                 isSearchable: false,
               ),
             ),
-            Row(
-              mainAxisSize: MainAxisSize.max,
-              children: [
-                Align(
-                  alignment: AlignmentDirectional(-1.0, 0.0),
-                  child: Padding(
-                    padding:
-                        EdgeInsetsDirectional.fromSTEB(30.0, 0.0, 0.0, 0.0),
-                    child: Text(
-                      'Strength',
-                      textAlign: TextAlign.start,
-                      style: FlutterFlowTheme.of(context).bodyMedium.override(
-                            fontFamily: 'Readex Pro',
-                            fontSize: 16.0,
-                            fontWeight: FontWeight.w600,
-                          ),
-                    ),
-                  ),
-                ),
-                Flexible(
-                  child: Align(
-                    alignment: AlignmentDirectional(1.0, 0.0),
+            Padding(
+              padding: EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 5.0),
+              child: Row(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Align(
+                    alignment: AlignmentDirectional(-1.0, 0.0),
                     child: Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 20.0, 0.0),
-                      child: Container(
-                        width: 160.0,
-                        height: 50.0,
-                        decoration: BoxDecoration(
-                          color:
-                              FlutterFlowTheme.of(context).secondaryBackground,
-                          borderRadius: BorderRadius.circular(8.0),
-                          shape: BoxShape.rectangle,
-                          border: Border.all(
-                            color: FlutterFlowTheme.of(context).alternate,
-                            width: 2.0,
+                          EdgeInsetsDirectional.fromSTEB(30.0, 0.0, 0.0, 0.0),
+                      child: Text(
+                        'Strength',
+                        textAlign: TextAlign.start,
+                        style: FlutterFlowTheme.of(context).bodyMedium.override(
+                              fontFamily: 'Readex Pro',
+                              fontSize: 16.0,
+                              fontWeight: FontWeight.w600,
+                            ),
+                      ),
+                    ),
+                  ),
+                  Flexible(
+                    child: Align(
+                      alignment: AlignmentDirectional(1.0, 0.0),
+                      child: Padding(
+                        padding:
+                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 20.0, 0.0),
+                        child: Container(
+                          width: 160.0,
+                          height: 50.0,
+                          decoration: BoxDecoration(
+                            color: FlutterFlowTheme.of(context)
+                                .secondaryBackground,
+                            borderRadius: BorderRadius.circular(8.0),
+                            shape: BoxShape.rectangle,
+                            border: Border.all(
+                              color: FlutterFlowTheme.of(context).alternate,
+                              width: 2.0,
+                            ),
                           ),
-                        ),
-                        child: FlutterFlowCountController(
-                          decrementIconBuilder: (enabled) => FaIcon(
-                            FontAwesomeIcons.minus,
-                            color: enabled
-                                ? FlutterFlowTheme.of(context).secondaryText
-                                : FlutterFlowTheme.of(context).alternate,
-                            size: 20.0,
+                          child: FlutterFlowCountController(
+                            decrementIconBuilder: (enabled) => FaIcon(
+                              FontAwesomeIcons.minus,
+                              color: enabled
+                                  ? FlutterFlowTheme.of(context).secondaryText
+                                  : FlutterFlowTheme.of(context).alternate,
+                              size: 20.0,
+                            ),
+                            incrementIconBuilder: (enabled) => FaIcon(
+                              FontAwesomeIcons.plus,
+                              color: enabled
+                                  ? FlutterFlowTheme.of(context).primary
+                                  : FlutterFlowTheme.of(context).alternate,
+                              size: 20.0,
+                            ),
+                            countBuilder: (count) => Text(
+                              count.toString(),
+                              style: FlutterFlowTheme.of(context).titleLarge,
+                            ),
+                            count: _model.countControllerValue1 ??=
+                                widget.strengthCharacter!,
+                            updateCount: (count) => setState(
+                                () => _model.countControllerValue1 = count),
+                            stepSize: 1,
+                            minimum: 0,
+                            maximum: 50,
                           ),
-                          incrementIconBuilder: (enabled) => FaIcon(
-                            FontAwesomeIcons.plus,
-                            color: enabled
-                                ? FlutterFlowTheme.of(context).primary
-                                : FlutterFlowTheme.of(context).alternate,
-                            size: 20.0,
-                          ),
-                          countBuilder: (count) => Text(
-                            count.toString(),
-                            style: FlutterFlowTheme.of(context).titleLarge,
-                          ),
-                          count: _model.countControllerValue1 ??=
-                              widget.strengthCharacter!,
-                          updateCount: (count) => setState(
-                              () => _model.countControllerValue1 = count),
-                          stepSize: 1,
-                          minimum: 0,
-                          maximum: 50,
                         ),
                       ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-            Row(
-              mainAxisSize: MainAxisSize.max,
-              children: [
-                Align(
-                  alignment: AlignmentDirectional(-1.0, 0.0),
-                  child: Padding(
-                    padding:
-                        EdgeInsetsDirectional.fromSTEB(30.0, 0.0, 0.0, 0.0),
-                    child: Text(
-                      'Dexterity',
-                      textAlign: TextAlign.start,
-                      style: FlutterFlowTheme.of(context).bodyMedium.override(
-                            fontFamily: 'Readex Pro',
-                            fontSize: 16.0,
-                            fontWeight: FontWeight.w600,
-                          ),
-                    ),
-                  ),
-                ),
-                Flexible(
-                  child: Align(
-                    alignment: AlignmentDirectional(1.0, 0.0),
+            Padding(
+              padding: EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 5.0),
+              child: Row(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Align(
+                    alignment: AlignmentDirectional(-1.0, 0.0),
                     child: Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 20.0, 0.0),
-                      child: Container(
-                        width: 160.0,
-                        height: 50.0,
-                        decoration: BoxDecoration(
-                          color:
-                              FlutterFlowTheme.of(context).secondaryBackground,
-                          borderRadius: BorderRadius.circular(8.0),
-                          shape: BoxShape.rectangle,
-                          border: Border.all(
-                            color: FlutterFlowTheme.of(context).alternate,
-                            width: 2.0,
+                          EdgeInsetsDirectional.fromSTEB(30.0, 0.0, 0.0, 0.0),
+                      child: Text(
+                        'Dexterity',
+                        textAlign: TextAlign.start,
+                        style: FlutterFlowTheme.of(context).bodyMedium.override(
+                              fontFamily: 'Readex Pro',
+                              fontSize: 16.0,
+                              fontWeight: FontWeight.w600,
+                            ),
+                      ),
+                    ),
+                  ),
+                  Flexible(
+                    child: Align(
+                      alignment: AlignmentDirectional(1.0, 0.0),
+                      child: Padding(
+                        padding:
+                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 20.0, 0.0),
+                        child: Container(
+                          width: 160.0,
+                          height: 50.0,
+                          decoration: BoxDecoration(
+                            color: FlutterFlowTheme.of(context)
+                                .secondaryBackground,
+                            borderRadius: BorderRadius.circular(8.0),
+                            shape: BoxShape.rectangle,
+                            border: Border.all(
+                              color: FlutterFlowTheme.of(context).alternate,
+                              width: 2.0,
+                            ),
                           ),
-                        ),
-                        child: FlutterFlowCountController(
-                          decrementIconBuilder: (enabled) => FaIcon(
-                            FontAwesomeIcons.minus,
-                            color: enabled
-                                ? FlutterFlowTheme.of(context).secondaryText
-                                : FlutterFlowTheme.of(context).alternate,
-                            size: 20.0,
+                          child: FlutterFlowCountController(
+                            decrementIconBuilder: (enabled) => FaIcon(
+                              FontAwesomeIcons.minus,
+                              color: enabled
+                                  ? FlutterFlowTheme.of(context).secondaryText
+                                  : FlutterFlowTheme.of(context).alternate,
+                              size: 20.0,
+                            ),
+                            incrementIconBuilder: (enabled) => FaIcon(
+                              FontAwesomeIcons.plus,
+                              color: enabled
+                                  ? FlutterFlowTheme.of(context).primary
+                                  : FlutterFlowTheme.of(context).alternate,
+                              size: 20.0,
+                            ),
+                            countBuilder: (count) => Text(
+                              count.toString(),
+                              style: FlutterFlowTheme.of(context).titleLarge,
+                            ),
+                            count: _model.countControllerValue2 ??=
+                                widget.dexterityCharacter!,
+                            updateCount: (count) => setState(
+                                () => _model.countControllerValue2 = count),
+                            stepSize: 1,
+                            minimum: 0,
+                            maximum: 50,
                           ),
-                          incrementIconBuilder: (enabled) => FaIcon(
-                            FontAwesomeIcons.plus,
-                            color: enabled
-                                ? FlutterFlowTheme.of(context).primary
-                                : FlutterFlowTheme.of(context).alternate,
-                            size: 20.0,
-                          ),
-                          countBuilder: (count) => Text(
-                            count.toString(),
-                            style: FlutterFlowTheme.of(context).titleLarge,
-                          ),
-                          count: _model.countControllerValue2 ??=
-                              widget.dexterityCharacter!,
-                          updateCount: (count) => setState(
-                              () => _model.countControllerValue2 = count),
-                          stepSize: 1,
-                          minimum: 0,
-                          maximum: 50,
                         ),
                       ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-            Row(
-              mainAxisSize: MainAxisSize.max,
-              children: [
-                Align(
-                  alignment: AlignmentDirectional(-1.0, 0.0),
-                  child: Padding(
-                    padding:
-                        EdgeInsetsDirectional.fromSTEB(30.0, 0.0, 0.0, 0.0),
-                    child: Text(
-                      'Constitution',
-                      textAlign: TextAlign.start,
-                      style: FlutterFlowTheme.of(context).bodyMedium.override(
-                            fontFamily: 'Readex Pro',
-                            fontSize: 16.0,
-                            fontWeight: FontWeight.w600,
-                          ),
-                    ),
-                  ),
-                ),
-                Flexible(
-                  child: Align(
-                    alignment: AlignmentDirectional(1.0, 0.0),
+            Padding(
+              padding: EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 5.0),
+              child: Row(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Align(
+                    alignment: AlignmentDirectional(-1.0, 0.0),
                     child: Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 20.0, 0.0),
-                      child: Container(
-                        width: 160.0,
-                        height: 50.0,
-                        decoration: BoxDecoration(
-                          color:
-                              FlutterFlowTheme.of(context).secondaryBackground,
-                          borderRadius: BorderRadius.circular(8.0),
-                          shape: BoxShape.rectangle,
-                          border: Border.all(
-                            color: FlutterFlowTheme.of(context).alternate,
-                            width: 2.0,
+                          EdgeInsetsDirectional.fromSTEB(30.0, 0.0, 0.0, 0.0),
+                      child: Text(
+                        'Constitution',
+                        textAlign: TextAlign.start,
+                        style: FlutterFlowTheme.of(context).bodyMedium.override(
+                              fontFamily: 'Readex Pro',
+                              fontSize: 16.0,
+                              fontWeight: FontWeight.w600,
+                            ),
+                      ),
+                    ),
+                  ),
+                  Flexible(
+                    child: Align(
+                      alignment: AlignmentDirectional(1.0, 0.0),
+                      child: Padding(
+                        padding:
+                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 20.0, 0.0),
+                        child: Container(
+                          width: 160.0,
+                          height: 50.0,
+                          decoration: BoxDecoration(
+                            color: FlutterFlowTheme.of(context)
+                                .secondaryBackground,
+                            borderRadius: BorderRadius.circular(8.0),
+                            shape: BoxShape.rectangle,
+                            border: Border.all(
+                              color: FlutterFlowTheme.of(context).alternate,
+                              width: 2.0,
+                            ),
                           ),
-                        ),
-                        child: FlutterFlowCountController(
-                          decrementIconBuilder: (enabled) => FaIcon(
-                            FontAwesomeIcons.minus,
-                            color: enabled
-                                ? FlutterFlowTheme.of(context).secondaryText
-                                : FlutterFlowTheme.of(context).alternate,
-                            size: 20.0,
+                          child: FlutterFlowCountController(
+                            decrementIconBuilder: (enabled) => FaIcon(
+                              FontAwesomeIcons.minus,
+                              color: enabled
+                                  ? FlutterFlowTheme.of(context).secondaryText
+                                  : FlutterFlowTheme.of(context).alternate,
+                              size: 20.0,
+                            ),
+                            incrementIconBuilder: (enabled) => FaIcon(
+                              FontAwesomeIcons.plus,
+                              color: enabled
+                                  ? FlutterFlowTheme.of(context).primary
+                                  : FlutterFlowTheme.of(context).alternate,
+                              size: 20.0,
+                            ),
+                            countBuilder: (count) => Text(
+                              count.toString(),
+                              style: FlutterFlowTheme.of(context).titleLarge,
+                            ),
+                            count: _model.countControllerValue3 ??=
+                                widget.constitutionCharacter!,
+                            updateCount: (count) => setState(
+                                () => _model.countControllerValue3 = count),
+                            stepSize: 1,
+                            minimum: 0,
+                            maximum: 50,
                           ),
-                          incrementIconBuilder: (enabled) => FaIcon(
-                            FontAwesomeIcons.plus,
-                            color: enabled
-                                ? FlutterFlowTheme.of(context).primary
-                                : FlutterFlowTheme.of(context).alternate,
-                            size: 20.0,
-                          ),
-                          countBuilder: (count) => Text(
-                            count.toString(),
-                            style: FlutterFlowTheme.of(context).titleLarge,
-                          ),
-                          count: _model.countControllerValue3 ??=
-                              widget.constitutionCharacter!,
-                          updateCount: (count) => setState(
-                              () => _model.countControllerValue3 = count),
-                          stepSize: 1,
-                          minimum: 0,
-                          maximum: 50,
                         ),
                       ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-            Row(
-              mainAxisSize: MainAxisSize.max,
-              children: [
-                Align(
-                  alignment: AlignmentDirectional(-1.0, 0.0),
-                  child: Padding(
-                    padding:
-                        EdgeInsetsDirectional.fromSTEB(30.0, 0.0, 0.0, 0.0),
-                    child: Text(
-                      'Intelligence',
-                      textAlign: TextAlign.start,
-                      style: FlutterFlowTheme.of(context).bodyMedium.override(
-                            fontFamily: 'Readex Pro',
-                            fontSize: 16.0,
-                            fontWeight: FontWeight.w600,
-                          ),
-                    ),
-                  ),
-                ),
-                Flexible(
-                  child: Align(
-                    alignment: AlignmentDirectional(1.0, 0.0),
+            Padding(
+              padding: EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 5.0),
+              child: Row(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Align(
+                    alignment: AlignmentDirectional(-1.0, 0.0),
                     child: Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 20.0, 0.0),
-                      child: Container(
-                        width: 160.0,
-                        height: 50.0,
-                        decoration: BoxDecoration(
-                          color:
-                              FlutterFlowTheme.of(context).secondaryBackground,
-                          borderRadius: BorderRadius.circular(8.0),
-                          shape: BoxShape.rectangle,
-                          border: Border.all(
-                            color: FlutterFlowTheme.of(context).alternate,
-                            width: 2.0,
+                          EdgeInsetsDirectional.fromSTEB(30.0, 0.0, 0.0, 0.0),
+                      child: Text(
+                        'Intelligence',
+                        textAlign: TextAlign.start,
+                        style: FlutterFlowTheme.of(context).bodyMedium.override(
+                              fontFamily: 'Readex Pro',
+                              fontSize: 16.0,
+                              fontWeight: FontWeight.w600,
+                            ),
+                      ),
+                    ),
+                  ),
+                  Flexible(
+                    child: Align(
+                      alignment: AlignmentDirectional(1.0, 0.0),
+                      child: Padding(
+                        padding:
+                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 20.0, 0.0),
+                        child: Container(
+                          width: 160.0,
+                          height: 50.0,
+                          decoration: BoxDecoration(
+                            color: FlutterFlowTheme.of(context)
+                                .secondaryBackground,
+                            borderRadius: BorderRadius.circular(8.0),
+                            shape: BoxShape.rectangle,
+                            border: Border.all(
+                              color: FlutterFlowTheme.of(context).alternate,
+                              width: 2.0,
+                            ),
                           ),
-                        ),
-                        child: FlutterFlowCountController(
-                          decrementIconBuilder: (enabled) => FaIcon(
-                            FontAwesomeIcons.minus,
-                            color: enabled
-                                ? FlutterFlowTheme.of(context).secondaryText
-                                : FlutterFlowTheme.of(context).alternate,
-                            size: 20.0,
+                          child: FlutterFlowCountController(
+                            decrementIconBuilder: (enabled) => FaIcon(
+                              FontAwesomeIcons.minus,
+                              color: enabled
+                                  ? FlutterFlowTheme.of(context).secondaryText
+                                  : FlutterFlowTheme.of(context).alternate,
+                              size: 20.0,
+                            ),
+                            incrementIconBuilder: (enabled) => FaIcon(
+                              FontAwesomeIcons.plus,
+                              color: enabled
+                                  ? FlutterFlowTheme.of(context).primary
+                                  : FlutterFlowTheme.of(context).alternate,
+                              size: 20.0,
+                            ),
+                            countBuilder: (count) => Text(
+                              count.toString(),
+                              style: FlutterFlowTheme.of(context).titleLarge,
+                            ),
+                            count: _model.countControllerValue4 ??=
+                                widget.intelligenceCharacter!,
+                            updateCount: (count) => setState(
+                                () => _model.countControllerValue4 = count),
+                            stepSize: 1,
+                            minimum: 0,
+                            maximum: 50,
                           ),
-                          incrementIconBuilder: (enabled) => FaIcon(
-                            FontAwesomeIcons.plus,
-                            color: enabled
-                                ? FlutterFlowTheme.of(context).primary
-                                : FlutterFlowTheme.of(context).alternate,
-                            size: 20.0,
-                          ),
-                          countBuilder: (count) => Text(
-                            count.toString(),
-                            style: FlutterFlowTheme.of(context).titleLarge,
-                          ),
-                          count: _model.countControllerValue4 ??=
-                              widget.intelligenceCharacter!,
-                          updateCount: (count) => setState(
-                              () => _model.countControllerValue4 = count),
-                          stepSize: 1,
-                          minimum: 0,
-                          maximum: 50,
                         ),
                       ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-            Row(
-              mainAxisSize: MainAxisSize.max,
-              children: [
-                Align(
-                  alignment: AlignmentDirectional(-1.0, 0.0),
-                  child: Padding(
-                    padding:
-                        EdgeInsetsDirectional.fromSTEB(30.0, 0.0, 0.0, 0.0),
-                    child: Text(
-                      'Wisdom',
-                      textAlign: TextAlign.start,
-                      style: FlutterFlowTheme.of(context).bodyMedium.override(
-                            fontFamily: 'Readex Pro',
-                            fontSize: 16.0,
-                            fontWeight: FontWeight.w600,
-                          ),
-                    ),
-                  ),
-                ),
-                Flexible(
-                  child: Align(
-                    alignment: AlignmentDirectional(1.0, 0.0),
+            Padding(
+              padding: EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 5.0),
+              child: Row(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Align(
+                    alignment: AlignmentDirectional(-1.0, 0.0),
                     child: Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 20.0, 0.0),
-                      child: Container(
-                        width: 160.0,
-                        height: 50.0,
-                        decoration: BoxDecoration(
-                          color:
-                              FlutterFlowTheme.of(context).secondaryBackground,
-                          borderRadius: BorderRadius.circular(8.0),
-                          shape: BoxShape.rectangle,
-                          border: Border.all(
-                            color: FlutterFlowTheme.of(context).alternate,
-                            width: 2.0,
+                          EdgeInsetsDirectional.fromSTEB(30.0, 0.0, 0.0, 0.0),
+                      child: Text(
+                        'Wisdom',
+                        textAlign: TextAlign.start,
+                        style: FlutterFlowTheme.of(context).bodyMedium.override(
+                              fontFamily: 'Readex Pro',
+                              fontSize: 16.0,
+                              fontWeight: FontWeight.w600,
+                            ),
+                      ),
+                    ),
+                  ),
+                  Flexible(
+                    child: Align(
+                      alignment: AlignmentDirectional(1.0, 0.0),
+                      child: Padding(
+                        padding:
+                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 20.0, 0.0),
+                        child: Container(
+                          width: 160.0,
+                          height: 50.0,
+                          decoration: BoxDecoration(
+                            color: FlutterFlowTheme.of(context)
+                                .secondaryBackground,
+                            borderRadius: BorderRadius.circular(8.0),
+                            shape: BoxShape.rectangle,
+                            border: Border.all(
+                              color: FlutterFlowTheme.of(context).alternate,
+                              width: 2.0,
+                            ),
                           ),
-                        ),
-                        child: FlutterFlowCountController(
-                          decrementIconBuilder: (enabled) => FaIcon(
-                            FontAwesomeIcons.minus,
-                            color: enabled
-                                ? FlutterFlowTheme.of(context).secondaryText
-                                : FlutterFlowTheme.of(context).alternate,
-                            size: 20.0,
+                          child: FlutterFlowCountController(
+                            decrementIconBuilder: (enabled) => FaIcon(
+                              FontAwesomeIcons.minus,
+                              color: enabled
+                                  ? FlutterFlowTheme.of(context).secondaryText
+                                  : FlutterFlowTheme.of(context).alternate,
+                              size: 20.0,
+                            ),
+                            incrementIconBuilder: (enabled) => FaIcon(
+                              FontAwesomeIcons.plus,
+                              color: enabled
+                                  ? FlutterFlowTheme.of(context).primary
+                                  : FlutterFlowTheme.of(context).alternate,
+                              size: 20.0,
+                            ),
+                            countBuilder: (count) => Text(
+                              count.toString(),
+                              style: FlutterFlowTheme.of(context).titleLarge,
+                            ),
+                            count: _model.countControllerValue5 ??=
+                                widget.wisdomCharacter!,
+                            updateCount: (count) => setState(
+                                () => _model.countControllerValue5 = count),
+                            stepSize: 1,
+                            minimum: 0,
+                            maximum: 50,
                           ),
-                          incrementIconBuilder: (enabled) => FaIcon(
-                            FontAwesomeIcons.plus,
-                            color: enabled
-                                ? FlutterFlowTheme.of(context).primary
-                                : FlutterFlowTheme.of(context).alternate,
-                            size: 20.0,
-                          ),
-                          countBuilder: (count) => Text(
-                            count.toString(),
-                            style: FlutterFlowTheme.of(context).titleLarge,
-                          ),
-                          count: _model.countControllerValue5 ??=
-                              widget.wisdomCharacter!,
-                          updateCount: (count) => setState(
-                              () => _model.countControllerValue5 = count),
-                          stepSize: 1,
-                          minimum: 0,
-                          maximum: 50,
                         ),
                       ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-            Row(
-              mainAxisSize: MainAxisSize.max,
-              children: [
-                Align(
-                  alignment: AlignmentDirectional(-1.0, 0.0),
-                  child: Padding(
+            Padding(
+              padding: EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 5.0),
+              child: Row(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Align(
+                    alignment: AlignmentDirectional(-1.0, 0.0),
+                    child: Padding(
+                      padding:
+                          EdgeInsetsDirectional.fromSTEB(30.0, 0.0, 0.0, 0.0),
+                      child: Text(
+                        'Charisma',
+                        textAlign: TextAlign.start,
+                        style: FlutterFlowTheme.of(context).bodyMedium.override(
+                              fontFamily: 'Readex Pro',
+                              fontSize: 16.0,
+                              fontWeight: FontWeight.w600,
+                            ),
+                      ),
+                    ),
+                  ),
+                  Flexible(
+                    child: Align(
+                      alignment: AlignmentDirectional(1.0, 0.0),
+                      child: Padding(
+                        padding:
+                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 20.0, 0.0),
+                        child: Container(
+                          width: 160.0,
+                          height: 50.0,
+                          decoration: BoxDecoration(
+                            color: FlutterFlowTheme.of(context)
+                                .secondaryBackground,
+                            borderRadius: BorderRadius.circular(8.0),
+                            shape: BoxShape.rectangle,
+                            border: Border.all(
+                              color: FlutterFlowTheme.of(context).alternate,
+                              width: 2.0,
+                            ),
+                          ),
+                          child: FlutterFlowCountController(
+                            decrementIconBuilder: (enabled) => FaIcon(
+                              FontAwesomeIcons.minus,
+                              color: enabled
+                                  ? FlutterFlowTheme.of(context).secondaryText
+                                  : FlutterFlowTheme.of(context).alternate,
+                              size: 20.0,
+                            ),
+                            incrementIconBuilder: (enabled) => FaIcon(
+                              FontAwesomeIcons.plus,
+                              color: enabled
+                                  ? FlutterFlowTheme.of(context).primary
+                                  : FlutterFlowTheme.of(context).alternate,
+                              size: 20.0,
+                            ),
+                            countBuilder: (count) => Text(
+                              count.toString(),
+                              style: FlutterFlowTheme.of(context).titleLarge,
+                            ),
+                            count: _model.countControllerValue6 ??=
+                                widget.charismaCharacter!,
+                            updateCount: (count) => setState(
+                                () => _model.countControllerValue6 = count),
+                            stepSize: 1,
+                            minimum: 0,
+                            maximum: 50,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Padding(
+              padding: EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 5.0),
+              child: Row(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Padding(
                     padding:
                         EdgeInsetsDirectional.fromSTEB(30.0, 0.0, 0.0, 0.0),
                     child: Text(
-                      'Charisma',
+                      'Add picture',
                       textAlign: TextAlign.start,
                       style: FlutterFlowTheme.of(context).bodyMedium.override(
                             fontFamily: 'Readex Pro',
@@ -614,58 +711,61 @@ class _CreateCharacterWidgetState extends State<CreateCharacterWidget> {
                           ),
                     ),
                   ),
-                ),
-                Flexible(
-                  child: Align(
-                    alignment: AlignmentDirectional(1.0, 0.0),
-                    child: Padding(
-                      padding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 20.0, 0.0),
-                      child: Container(
-                        width: 160.0,
-                        height: 50.0,
-                        decoration: BoxDecoration(
-                          color:
-                              FlutterFlowTheme.of(context).secondaryBackground,
-                          borderRadius: BorderRadius.circular(8.0),
-                          shape: BoxShape.rectangle,
-                          border: Border.all(
-                            color: FlutterFlowTheme.of(context).alternate,
-                            width: 2.0,
-                          ),
-                        ),
-                        child: FlutterFlowCountController(
-                          decrementIconBuilder: (enabled) => FaIcon(
-                            FontAwesomeIcons.minus,
-                            color: enabled
-                                ? FlutterFlowTheme.of(context).secondaryText
-                                : FlutterFlowTheme.of(context).alternate,
-                            size: 20.0,
-                          ),
-                          incrementIconBuilder: (enabled) => FaIcon(
-                            FontAwesomeIcons.plus,
-                            color: enabled
-                                ? FlutterFlowTheme.of(context).primary
-                                : FlutterFlowTheme.of(context).alternate,
-                            size: 20.0,
-                          ),
-                          countBuilder: (count) => Text(
-                            count.toString(),
-                            style: FlutterFlowTheme.of(context).titleLarge,
-                          ),
-                          count: _model.countControllerValue6 ??=
-                              widget.charismaCharacter!,
-                          updateCount: (count) => setState(
-                              () => _model.countControllerValue6 = count),
-                          stepSize: 1,
-                          minimum: 0,
-                          maximum: 50,
-                        ),
+                  Padding(
+                    padding:
+                        EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 35.0, 0.0),
+                    child: FlutterFlowIconButton(
+                      borderColor: FlutterFlowTheme.of(context).primary,
+                      borderRadius: 20.0,
+                      borderWidth: 1.0,
+                      buttonSize: 40.0,
+                      fillColor: FlutterFlowTheme.of(context).accent1,
+                      icon: Icon(
+                        Icons.add,
+                        color: FlutterFlowTheme.of(context).primaryText,
+                        size: 24.0,
                       ),
+                      onPressed: () async {
+                        final selectedMedia =
+                            await selectMediaWithSourceBottomSheet(
+                          context: context,
+                          allowPhoto: true,
+                        );
+                        if (selectedMedia != null &&
+                            selectedMedia.every((m) =>
+                                validateFileFormat(m.storagePath, context))) {
+                          setState(() => _model.isDataUploading = true);
+                          var selectedUploadedFiles = <FFUploadedFile>[];
+
+                          try {
+                            selectedUploadedFiles = selectedMedia
+                                .map((m) => FFUploadedFile(
+                                      name: m.storagePath.split('/').last,
+                                      bytes: m.bytes,
+                                      height: m.dimensions?.height,
+                                      width: m.dimensions?.width,
+                                      blurHash: m.blurHash,
+                                    ))
+                                .toList();
+                          } finally {
+                            _model.isDataUploading = false;
+                          }
+                          if (selectedUploadedFiles.length ==
+                              selectedMedia.length) {
+                            setState(() {
+                              _model.uploadedLocalFile =
+                                  selectedUploadedFiles.first;
+                            });
+                          } else {
+                            setState(() {});
+                            return;
+                          }
+                        }
+                      },
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
             Align(
               alignment: AlignmentDirectional(0.0, 0.05),
