@@ -88,42 +88,28 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'HomePage',
           path: '/homePage',
-          builder: (context, params) => HomePageWidget(
-            hasCharacters: params.getParam('hasCharacters', ParamType.int),
-          ),
-        ),
-        FFRoute(
-          name: 'Characterpage',
-          path: '/characterpage',
-          builder: (context, params) => CharacterpageWidget(),
-        ),
-        FFRoute(
-          name: 'CreateCharacter',
-          path: '/createCharacter',
-          requireAuth: true,
-          builder: (context, params) => CreateCharacterWidget(
-            raceCharacter: params.getParam<String>(
-                'raceCharacter', ParamType.String, true),
-            nameCharacter: params.getParam('nameCharacter', ParamType.String),
-            classCharacter: params.getParam<String>(
-                'classCharacter', ParamType.String, true),
-            strengthCharacter:
-                params.getParam('strengthCharacter', ParamType.int),
-            dexterityCharacter:
-                params.getParam('dexterityCharacter', ParamType.int),
-            constitutionCharacter:
-                params.getParam('constitutionCharacter', ParamType.int),
-            intelligenceCharacter:
-                params.getParam('intelligenceCharacter', ParamType.int),
-            wisdomCharacter: params.getParam('wisdomCharacter', ParamType.int),
-            charismaCharacter:
-                params.getParam('charismaCharacter', ParamType.int),
-          ),
+          builder: (context, params) => HomePageWidget(),
         ),
         FFRoute(
           name: 'Auth1',
           path: '/auth1',
           builder: (context, params) => Auth1Widget(),
+        ),
+        FFRoute(
+          name: 'createCharacter',
+          path: '/createCharacter',
+          builder: (context, params) => CreateCharacterWidget(),
+        ),
+        FFRoute(
+          name: 'characterView',
+          path: '/characterView',
+          asyncParams: {
+            'character': getDoc(
+                ['users', 'userCharacters'], UserCharactersRecord.fromSnapshot),
+          },
+          builder: (context, params) => CharacterViewWidget(
+            character: params.getParam('character', ParamType.Document),
+          ),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

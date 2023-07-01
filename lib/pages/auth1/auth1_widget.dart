@@ -97,6 +97,8 @@ class _Auth1WidgetState extends State<Auth1Widget>
     _model.emailAddressCreateController ??= TextEditingController();
     _model.passwordCreateController ??= TextEditingController();
     _model.passwordConfirmController ??= TextEditingController();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override
@@ -155,9 +157,8 @@ class _Auth1WidgetState extends State<Auth1Widget>
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        32.0, 0.0, 0.0, 0.0),
+                                  Align(
+                                    alignment: AlignmentDirectional(0.0, 0.0),
                                     child: Text(
                                       'D&D tracker',
                                       style: FlutterFlowTheme.of(context)
@@ -483,7 +484,6 @@ class _Auth1WidgetState extends State<Auth1Widget>
                                                       0.0, 0.0, 0.0, 16.0),
                                               child: FFButtonWidget(
                                                 onPressed: () async {
-                                                  // Authentiction
                                                   GoRouter.of(context)
                                                       .prepareAuthEvent();
 
@@ -501,18 +501,8 @@ class _Auth1WidgetState extends State<Auth1Widget>
                                                   }
 
                                                   context.goNamedAuth(
-                                                    'HomePage',
-                                                    context.mounted,
-                                                    extra: <String, dynamic>{
-                                                      kTransitionInfoKey:
-                                                          TransitionInfo(
-                                                        hasTransition: true,
-                                                        transitionType:
-                                                            PageTransitionType
-                                                                .leftToRight,
-                                                      ),
-                                                    },
-                                                  );
+                                                      'HomePage',
+                                                      context.mounted);
                                                 },
                                                 text: 'Sign In',
                                                 options: FFButtonOptions(

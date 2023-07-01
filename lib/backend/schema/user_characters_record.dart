@@ -46,6 +46,31 @@ class UserCharactersRecord extends FirestoreRecord {
   int get characterDexterity => _characterDexterity ?? 0;
   bool hasCharacterDexterity() => _characterDexterity != null;
 
+  // "characterConstitution" field.
+  int? _characterConstitution;
+  int get characterConstitution => _characterConstitution ?? 0;
+  bool hasCharacterConstitution() => _characterConstitution != null;
+
+  // "characterIntelligence" field.
+  int? _characterIntelligence;
+  int get characterIntelligence => _characterIntelligence ?? 0;
+  bool hasCharacterIntelligence() => _characterIntelligence != null;
+
+  // "characterWisdom" field.
+  int? _characterWisdom;
+  int get characterWisdom => _characterWisdom ?? 0;
+  bool hasCharacterWisdom() => _characterWisdom != null;
+
+  // "characterCharisma" field.
+  int? _characterCharisma;
+  int get characterCharisma => _characterCharisma ?? 0;
+  bool hasCharacterCharisma() => _characterCharisma != null;
+
+  // "characterImg" field.
+  String? _characterImg;
+  String get characterImg => _characterImg ?? '';
+  bool hasCharacterImg() => _characterImg != null;
+
   DocumentReference get parentReference => reference.parent.parent!;
 
   void _initializeFields() {
@@ -55,6 +80,13 @@ class UserCharactersRecord extends FirestoreRecord {
     _characterClass = snapshotData['characterClass'] as String?;
     _characterStrength = castToType<int>(snapshotData['characterStrength']);
     _characterDexterity = castToType<int>(snapshotData['characterDexterity']);
+    _characterConstitution =
+        castToType<int>(snapshotData['characterConstitution']);
+    _characterIntelligence =
+        castToType<int>(snapshotData['characterIntelligence']);
+    _characterWisdom = castToType<int>(snapshotData['characterWisdom']);
+    _characterCharisma = castToType<int>(snapshotData['characterCharisma']);
+    _characterImg = snapshotData['characterImg'] as String?;
   }
 
   static Query<Map<String, dynamic>> collection([DocumentReference? parent]) =>
@@ -103,6 +135,11 @@ Map<String, dynamic> createUserCharactersRecordData({
   String? characterClass,
   int? characterStrength,
   int? characterDexterity,
+  int? characterConstitution,
+  int? characterIntelligence,
+  int? characterWisdom,
+  int? characterCharisma,
+  String? characterImg,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -112,6 +149,11 @@ Map<String, dynamic> createUserCharactersRecordData({
       'characterClass': characterClass,
       'characterStrength': characterStrength,
       'characterDexterity': characterDexterity,
+      'characterConstitution': characterConstitution,
+      'characterIntelligence': characterIntelligence,
+      'characterWisdom': characterWisdom,
+      'characterCharisma': characterCharisma,
+      'characterImg': characterImg,
     }.withoutNulls,
   );
 
@@ -129,7 +171,12 @@ class UserCharactersRecordDocumentEquality
         e1?.characterRace == e2?.characterRace &&
         e1?.characterClass == e2?.characterClass &&
         e1?.characterStrength == e2?.characterStrength &&
-        e1?.characterDexterity == e2?.characterDexterity;
+        e1?.characterDexterity == e2?.characterDexterity &&
+        e1?.characterConstitution == e2?.characterConstitution &&
+        e1?.characterIntelligence == e2?.characterIntelligence &&
+        e1?.characterWisdom == e2?.characterWisdom &&
+        e1?.characterCharisma == e2?.characterCharisma &&
+        e1?.characterImg == e2?.characterImg;
   }
 
   @override
@@ -139,7 +186,12 @@ class UserCharactersRecordDocumentEquality
         e?.characterRace,
         e?.characterClass,
         e?.characterStrength,
-        e?.characterDexterity
+        e?.characterDexterity,
+        e?.characterConstitution,
+        e?.characterIntelligence,
+        e?.characterWisdom,
+        e?.characterCharisma,
+        e?.characterImg
       ]);
 
   @override

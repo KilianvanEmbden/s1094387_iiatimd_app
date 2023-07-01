@@ -1,21 +1,17 @@
 import '/auth/firebase_auth/auth_util.dart';
+import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:provider/provider.dart';
 import 'home_page_model.dart';
 export 'home_page_model.dart';
 
 class HomePageWidget extends StatefulWidget {
-  const HomePageWidget({
-    Key? key,
-    int? hasCharacters,
-  })  : this.hasCharacters = hasCharacters ?? 0,
-        super(key: key);
-
-  final int hasCharacters;
+  const HomePageWidget({Key? key}) : super(key: key);
 
   @override
   _HomePageWidgetState createState() => _HomePageWidgetState();
@@ -30,6 +26,8 @@ class _HomePageWidgetState extends State<HomePageWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => HomePageModel());
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override
@@ -66,7 +64,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                   await authManager.signOut();
                   GoRouter.of(context).clearRedirectLocation();
 
-                  context.pushNamedAuth('Auth1', context.mounted);
+                  context.goNamedAuth('Auth1', context.mounted);
                 },
                 text: 'Log out',
                 options: FFButtonOptions(
@@ -98,123 +96,189 @@ class _HomePageWidgetState extends State<HomePageWidget> {
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Align(
-                alignment: AlignmentDirectional(0.0, 0.0),
-                child: Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 1.0),
-                  child: Container(
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      color: FlutterFlowTheme.of(context).secondaryBackground,
-                      boxShadow: [
-                        BoxShadow(
-                          blurRadius: 0.0,
-                          color: FlutterFlowTheme.of(context).primaryBackground,
-                          offset: Offset(0.0, 1.0),
-                        )
-                      ],
-                      borderRadius: BorderRadius.circular(0.0),
-                      border: Border.all(
-                        color: FlutterFlowTheme.of(context).primaryBackground,
-                        width: 1.0,
-                      ),
-                    ),
-                    child: Padding(
-                      padding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 12.0, 16.0, 12.0),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                16.0, 0.0, 0.0, 0.0),
-                            child: Container(
-                              width: 44.0,
-                              height: 44.0,
-                              decoration: BoxDecoration(
-                                color: FlutterFlowTheme.of(context).primary,
-                                shape: BoxShape.circle,
-                              ),
-                              alignment: AlignmentDirectional(0.0, 0.0),
-                              child: Text(
-                                'A',
-                                style: FlutterFlowTheme.of(context)
-                                    .titleMedium
-                                    .override(
-                                      fontFamily: 'Readex Pro',
-                                      color: Colors.white,
-                                    ),
-                              ),
-                            ),
-                          ),
-                          Expanded(
-                            child: Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
-                                  12.0, 0.0, 12.0, 0.0),
-                              child: Text(
-                                'List Item',
-                                style: FlutterFlowTheme.of(context).bodyLarge,
-                              ),
-                            ),
-                          ),
-                          Icon(
-                            Icons.chevron_right_rounded,
-                            color: FlutterFlowTheme.of(context).secondaryText,
-                            size: 24.0,
-                          ),
-                        ],
+              PagedListView<DocumentSnapshot<Object?>?, UserCharactersRecord>(
+                pagingController: () {
+                  final Query<Object?> Function(Query<Object?>) queryBuilder =
+                      (userCharactersRecord) => userCharactersRecord;
+                  if (_model.pagingController != null) {
+                    final query =
+                        queryBuilder(UserCharactersRecord.collection());
+                    if (query != _model.pagingQuery) {
+                      // The query has changed
+                      _model.pagingQuery = query;
+                      _model.streamSubscriptions.forEach((s) => s?.cancel());
+                      _model.streamSubscriptions.clear();
+                      _model.pagingController!.refresh();
+                    }
+                    return _model.pagingController!;
+                  }
+
+                  _model.pagingController =
+                      PagingController(firstPageKey: null);
+                  _model.pagingQuery =
+                      queryBuilder(UserCharactersRecord.collection());
+                  _model.pagingController!
+                      .addPageRequestListener((nextPageMarker) {
+                    queryUserCharactersRecordPage(
+                      parent: currentUserReference,
+                      queryBuilder: (userCharactersRecord) =>
+                          userCharactersRecord,
+                      nextPageMarker: nextPageMarker,
+                      pageSize: 10,
+                      isStream: true,
+                    ).then((page) {
+                      _model.pagingController!.appendPage(
+                        page.data,
+                        page.nextPageMarker,
+                      );
+                      final streamSubscription =
+                          page.dataStream?.listen((data) {
+                        data.forEach((item) {
+                          final itemIndexes = _model.pagingController!.itemList!
+                              .asMap()
+                              .map((k, v) => MapEntry(v.reference.id, k));
+                          final index = itemIndexes[item.reference.id];
+                          final items = _model.pagingController!.itemList!;
+                          if (index != null) {
+                            items.replaceRange(index, index + 1, [item]);
+                            _model.pagingController!.itemList = {
+                              for (var item in items) item.reference: item
+                            }.values.toList();
+                          }
+                        });
+                        setState(() {});
+                      });
+                      _model.streamSubscriptions.add(streamSubscription);
+                    });
+                  });
+                  return _model.pagingController!;
+                }(),
+                padding: EdgeInsets.zero,
+                shrinkWrap: true,
+                reverse: false,
+                scrollDirection: Axis.vertical,
+                builderDelegate:
+                    PagedChildBuilderDelegate<UserCharactersRecord>(
+                  // Customize what your widget looks like when it's loading the first page.
+                  firstPageProgressIndicatorBuilder: (_) => Center(
+                    child: SizedBox(
+                      width: 50.0,
+                      height: 50.0,
+                      child: CircularProgressIndicator(
+                        color: FlutterFlowTheme.of(context).primary,
                       ),
                     ),
                   ),
-                ),
-              ),
-              Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0.0, 24.0, 0.0, 0.0),
-                child: Row(
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      'Seems you don’t have any characters',
-                      textAlign: TextAlign.center,
-                      style:
-                          FlutterFlowTheme.of(context).headlineSmall.override(
-                                fontFamily: 'Outfit',
-                                color: Color(0xFF090F13),
-                                fontSize: 20.0,
-                                fontWeight: FontWeight.w500,
+
+                  itemBuilder: (context, _, listViewIndex) {
+                    final listViewUserCharactersRecord =
+                        _model.pagingController!.itemList![listViewIndex];
+                    return Align(
+                      alignment: AlignmentDirectional(0.0, 0.0),
+                      child: Padding(
+                        padding:
+                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 1.0),
+                        child: InkWell(
+                          splashColor: Colors.transparent,
+                          focusColor: Colors.transparent,
+                          hoverColor: Colors.transparent,
+                          highlightColor: Colors.transparent,
+                          onTap: () async {
+                            context.pushNamed(
+                              'characterView',
+                              queryParameters: {
+                                'character': serializeParam(
+                                  listViewUserCharactersRecord,
+                                  ParamType.Document,
+                                ),
+                              }.withoutNulls,
+                              extra: <String, dynamic>{
+                                'character': listViewUserCharactersRecord,
+                              },
+                            );
+                          },
+                          child: Container(
+                            width: double.infinity,
+                            decoration: BoxDecoration(
+                              color: FlutterFlowTheme.of(context)
+                                  .secondaryBackground,
+                              boxShadow: [
+                                BoxShadow(
+                                  blurRadius: 0.0,
+                                  color: FlutterFlowTheme.of(context)
+                                      .primaryBackground,
+                                  offset: Offset(0.0, 1.0),
+                                )
+                              ],
+                              borderRadius: BorderRadius.circular(0.0),
+                              border: Border.all(
+                                color: FlutterFlowTheme.of(context)
+                                    .primaryBackground,
+                                width: 1.0,
                               ),
-                    ),
-                  ],
-                ),
-              ),
-              Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(12.0, 4.0, 12.0, 0.0),
-                child: Row(
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Expanded(
-                      child: Text(
-                        'Click this button to start with your first character.',
-                        textAlign: TextAlign.center,
-                        style: FlutterFlowTheme.of(context).bodySmall.override(
-                              fontFamily: 'Outfit',
-                              color: Color(0xFF7C8791),
-                              fontSize: 14.0,
-                              fontWeight: FontWeight.normal,
                             ),
+                            child: Padding(
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  0.0, 12.0, 16.0, 12.0),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.max,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        16.0, 0.0, 0.0, 0.0),
+                                    child: Container(
+                                      width: 44.0,
+                                      height: 44.0,
+                                      decoration: BoxDecoration(
+                                        color: FlutterFlowTheme.of(context)
+                                            .primary,
+                                        image: DecorationImage(
+                                          fit: BoxFit.cover,
+                                          image: Image.network(
+                                            listViewUserCharactersRecord
+                                                .characterImg,
+                                          ).image,
+                                        ),
+                                        shape: BoxShape.circle,
+                                      ),
+                                      alignment: AlignmentDirectional(0.0, 0.0),
+                                    ),
+                                  ),
+                                  Expanded(
+                                    child: Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          12.0, 0.0, 12.0, 0.0),
+                                      child: Text(
+                                        listViewUserCharactersRecord
+                                            .characterName,
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyLarge,
+                                      ),
+                                    ),
+                                  ),
+                                  Icon(
+                                    Icons.chevron_right_rounded,
+                                    color: FlutterFlowTheme.of(context)
+                                        .secondaryText,
+                                    size: 24.0,
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
                       ),
-                    ),
-                  ],
+                    );
+                  },
                 ),
               ),
               Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(0.0, 12.0, 0.0, 0.0),
                 child: FFButtonWidget(
                   onPressed: () async {
-                    context.pushNamed('CreateCharacter');
+                    context.pushNamed('createCharacter');
                   },
                   text: 'Make a chracter',
                   options: FFButtonOptions(
