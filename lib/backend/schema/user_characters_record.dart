@@ -71,6 +71,16 @@ class UserCharactersRecord extends FirestoreRecord {
   String get characterImg => _characterImg ?? '';
   bool hasCharacterImg() => _characterImg != null;
 
+  // "characterColor" field.
+  Color? _characterColor;
+  Color? get characterColor => _characterColor;
+  bool hasCharacterColor() => _characterColor != null;
+
+  // "characterHP" field.
+  int? _characterHP;
+  int get characterHP => _characterHP ?? 0;
+  bool hasCharacterHP() => _characterHP != null;
+
   DocumentReference get parentReference => reference.parent.parent!;
 
   void _initializeFields() {
@@ -87,6 +97,8 @@ class UserCharactersRecord extends FirestoreRecord {
     _characterWisdom = castToType<int>(snapshotData['characterWisdom']);
     _characterCharisma = castToType<int>(snapshotData['characterCharisma']);
     _characterImg = snapshotData['characterImg'] as String?;
+    _characterColor = getSchemaColor(snapshotData['characterColor']);
+    _characterHP = castToType<int>(snapshotData['characterHP']);
   }
 
   static Query<Map<String, dynamic>> collection([DocumentReference? parent]) =>
@@ -140,6 +152,8 @@ Map<String, dynamic> createUserCharactersRecordData({
   int? characterWisdom,
   int? characterCharisma,
   String? characterImg,
+  Color? characterColor,
+  int? characterHP,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -154,6 +168,8 @@ Map<String, dynamic> createUserCharactersRecordData({
       'characterWisdom': characterWisdom,
       'characterCharisma': characterCharisma,
       'characterImg': characterImg,
+      'characterColor': characterColor,
+      'characterHP': characterHP,
     }.withoutNulls,
   );
 
@@ -176,7 +192,9 @@ class UserCharactersRecordDocumentEquality
         e1?.characterIntelligence == e2?.characterIntelligence &&
         e1?.characterWisdom == e2?.characterWisdom &&
         e1?.characterCharisma == e2?.characterCharisma &&
-        e1?.characterImg == e2?.characterImg;
+        e1?.characterImg == e2?.characterImg &&
+        e1?.characterColor == e2?.characterColor &&
+        e1?.characterHP == e2?.characterHP;
   }
 
   @override
@@ -191,7 +209,9 @@ class UserCharactersRecordDocumentEquality
         e?.characterIntelligence,
         e?.characterWisdom,
         e?.characterCharisma,
-        e?.characterImg
+        e?.characterImg,
+        e?.characterColor,
+        e?.characterHP
       ]);
 
   @override

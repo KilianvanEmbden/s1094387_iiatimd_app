@@ -11,6 +11,7 @@ import '/flutter_flow/upload_data.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutterflow_colorpicker/flutterflow_colorpicker.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -56,55 +57,51 @@ class _CreateCharacterWidgetState extends State<CreateCharacterWidget> {
     return Scaffold(
       key: scaffoldKey,
       backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(100.0),
-        child: AppBar(
-          backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
-          automaticallyImplyLeading: false,
-          title: Row(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              FFButtonWidget(
-                onPressed: () async {
-                  context.safePop();
-                },
-                text: '',
-                icon: Icon(
-                  Icons.chevron_left_rounded,
-                  size: 15.0,
-                ),
-                options: FFButtonOptions(
-                  height: 40.0,
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                  iconPadding:
-                      EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                  color: FlutterFlowTheme.of(context).primary,
-                  textStyle: FlutterFlowTheme.of(context).titleSmall.override(
-                        fontFamily: 'Readex Pro',
-                        color: Colors.white,
-                      ),
-                  elevation: 3.0,
-                  borderSide: BorderSide(
-                    color: Colors.transparent,
-                    width: 0.0,
-                  ),
-                  borderRadius: BorderRadius.circular(8.0),
-                ),
+      appBar: AppBar(
+        backgroundColor: _model.colorPicked,
+        automaticallyImplyLeading: false,
+        title: Row(
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            FFButtonWidget(
+              onPressed: () async {
+                context.safePop();
+              },
+              text: '',
+              icon: Icon(
+                Icons.chevron_left_rounded,
+                size: 15.0,
               ),
-              Text(
-                'Create Character',
-                style: FlutterFlowTheme.of(context).bodyMedium.override(
+              options: FFButtonOptions(
+                height: 40.0,
+                padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                iconPadding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                color: FlutterFlowTheme.of(context).primary,
+                textStyle: FlutterFlowTheme.of(context).titleSmall.override(
                       fontFamily: 'Readex Pro',
-                      fontSize: 28.0,
-                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
                     ),
+                elevation: 3.0,
+                borderSide: BorderSide(
+                  color: Colors.transparent,
+                  width: 0.0,
+                ),
+                borderRadius: BorderRadius.circular(8.0),
               ),
-            ],
-          ),
-          actions: [],
-          centerTitle: true,
+            ),
+            Text(
+              'Create Character',
+              style: FlutterFlowTheme.of(context).bodyMedium.override(
+                    fontFamily: 'Readex Pro',
+                    fontSize: 28.0,
+                    fontWeight: FontWeight.bold,
+                  ),
+            ),
+          ],
         ),
+        actions: [],
+        centerTitle: true,
       ),
       body: SafeArea(
         top: true,
@@ -181,7 +178,13 @@ class _CreateCharacterWidgetState extends State<CreateCharacterWidget> {
                           width: 70.0,
                           height: 70.0,
                           decoration: BoxDecoration(
-                            color: Color(0xFFDBE2E7),
+                            color: _model.colorPicked,
+                            image: DecorationImage(
+                              fit: BoxFit.cover,
+                              image: Image.network(
+                                widget.character!.characterImg,
+                              ).image,
+                            ),
                             shape: BoxShape.circle,
                           ),
                           child: Padding(
@@ -210,7 +213,51 @@ class _CreateCharacterWidgetState extends State<CreateCharacterWidget> {
                   children: [
                     Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 20.0, 16.0),
+                          EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 2.0),
+                      child: InkWell(
+                        splashColor: Colors.transparent,
+                        focusColor: Colors.transparent,
+                        hoverColor: Colors.transparent,
+                        highlightColor: Colors.transparent,
+                        onTap: () async {
+                          final _colorPickedColor = await showFFColorPicker(
+                            context,
+                            currentColor: _model.colorPicked ??=
+                                FlutterFlowTheme.of(context).primary,
+                            showRecentColors: true,
+                            allowOpacity: false,
+                            textColor: FlutterFlowTheme.of(context).primaryText,
+                            secondaryTextColor:
+                                FlutterFlowTheme.of(context).secondaryText,
+                            backgroundColor:
+                                FlutterFlowTheme.of(context).primaryBackground,
+                            primaryButtonBackgroundColor:
+                                FlutterFlowTheme.of(context).primary,
+                            primaryButtonTextColor: Colors.white,
+                            primaryButtonBorderColor: Colors.transparent,
+                            displayAsBottomSheet: isMobileWidth(context),
+                          );
+
+                          if (_colorPickedColor != null) {
+                            setState(() => _model.colorPicked =
+                                _colorPickedColor.withOpacity(1.0));
+                          }
+                        },
+                        child: Text(
+                          'Pick Color',
+                          textAlign: TextAlign.start,
+                          style:
+                              FlutterFlowTheme.of(context).bodyMedium.override(
+                                    fontFamily: 'Readex Pro',
+                                    fontSize: 18.0,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding:
+                          EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 20.0, 5.0),
                       child: TextFormField(
                         controller: _model.charNameController,
                         textCapitalization: TextCapitalization.words,
@@ -889,7 +936,7 @@ class _CreateCharacterWidgetState extends State<CreateCharacterWidget> {
                       alignment: AlignmentDirectional(0.0, 0.05),
                       child: Padding(
                         padding: EdgeInsetsDirectional.fromSTEB(
-                            0.0, 24.0, 0.0, 10.0),
+                            0.0, 10.0, 0.0, 10.0),
                         child: FFButtonWidget(
                           onPressed: () async {
                             await widget.character!.reference
@@ -905,6 +952,7 @@ class _CreateCharacterWidgetState extends State<CreateCharacterWidget> {
                               characterWisdom: _model.charWisValue,
                               characterCharisma: _model.charWisValue,
                               characterImg: _model.uploadedFileUrl,
+                              characterColor: _model.colorPicked,
                             ));
 
                             context.goNamed(
@@ -939,7 +987,7 @@ class _CreateCharacterWidgetState extends State<CreateCharacterWidget> {
                               color: Colors.transparent,
                               width: 1.0,
                             ),
-                            borderRadius: BorderRadius.circular(50.0),
+                            borderRadius: BorderRadius.circular(8.0),
                           ),
                         ),
                       ),

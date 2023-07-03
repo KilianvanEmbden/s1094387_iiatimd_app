@@ -191,6 +191,7 @@ class _Auth1WidgetState extends State<Auth1Widget>
                                 4.0, 4.0, 4.0, 4.0),
                             child: Column(
                               mainAxisSize: MainAxisSize.max,
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Row(
@@ -272,7 +273,7 @@ class _Auth1WidgetState extends State<Auth1Widget>
                                           Padding(
                                             padding:
                                                 EdgeInsetsDirectional.fromSTEB(
-                                                    0.0, 0.0, 0.0, 16.0),
+                                                    0.0, 0.0, 0.0, 10.0),
                                             child: Container(
                                               width: double.infinity,
                                               child: TextFormField(
@@ -300,7 +301,7 @@ class _Auth1WidgetState extends State<Auth1Widget>
                                                     ),
                                                     borderRadius:
                                                         BorderRadius.circular(
-                                                            40.0),
+                                                            8.0),
                                                   ),
                                                   focusedBorder:
                                                       OutlineInputBorder(
@@ -313,7 +314,7 @@ class _Auth1WidgetState extends State<Auth1Widget>
                                                     ),
                                                     borderRadius:
                                                         BorderRadius.circular(
-                                                            40.0),
+                                                            8.0),
                                                   ),
                                                   errorBorder:
                                                       OutlineInputBorder(
@@ -326,7 +327,7 @@ class _Auth1WidgetState extends State<Auth1Widget>
                                                     ),
                                                     borderRadius:
                                                         BorderRadius.circular(
-                                                            40.0),
+                                                            8.0),
                                                   ),
                                                   focusedErrorBorder:
                                                       OutlineInputBorder(
@@ -339,7 +340,7 @@ class _Auth1WidgetState extends State<Auth1Widget>
                                                     ),
                                                     borderRadius:
                                                         BorderRadius.circular(
-                                                            40.0),
+                                                            8.0),
                                                   ),
                                                   filled: true,
                                                   fillColor:
@@ -393,7 +394,7 @@ class _Auth1WidgetState extends State<Auth1Widget>
                                                     ),
                                                     borderRadius:
                                                         BorderRadius.circular(
-                                                            40.0),
+                                                            8.0),
                                                   ),
                                                   focusedBorder:
                                                       OutlineInputBorder(
@@ -406,7 +407,7 @@ class _Auth1WidgetState extends State<Auth1Widget>
                                                     ),
                                                     borderRadius:
                                                         BorderRadius.circular(
-                                                            40.0),
+                                                            8.0),
                                                   ),
                                                   errorBorder:
                                                       OutlineInputBorder(
@@ -419,7 +420,7 @@ class _Auth1WidgetState extends State<Auth1Widget>
                                                     ),
                                                     borderRadius:
                                                         BorderRadius.circular(
-                                                            40.0),
+                                                            8.0),
                                                   ),
                                                   focusedErrorBorder:
                                                       OutlineInputBorder(
@@ -432,7 +433,7 @@ class _Auth1WidgetState extends State<Auth1Widget>
                                                     ),
                                                     borderRadius:
                                                         BorderRadius.circular(
-                                                            40.0),
+                                                            8.0),
                                                   ),
                                                   filled: true,
                                                   fillColor:
@@ -534,7 +535,7 @@ class _Auth1WidgetState extends State<Auth1Widget>
                                                   ),
                                                   borderRadius:
                                                       BorderRadius.circular(
-                                                          40.0),
+                                                          8.0),
                                                 ),
                                               ),
                                             ),

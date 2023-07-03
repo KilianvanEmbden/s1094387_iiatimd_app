@@ -47,45 +47,43 @@ class _CharacterViewWidgetState extends State<CharacterViewWidget> {
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-        appBar: PreferredSize(
-          preferredSize: Size.fromHeight(100.0),
-          child: AppBar(
-            backgroundColor: FlutterFlowTheme.of(context).primary,
-            automaticallyImplyLeading: false,
-            title: Row(
+        appBar: AppBar(
+          backgroundColor: valueOrDefault<Color>(
+            widget.character!.characterColor,
+            Color(0xFF3225AA),
+          ),
+          automaticallyImplyLeading: false,
+          title: Padding(
+            padding: EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 20.0, 0.0),
+            child: Row(
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(5.0, 5.0, 0.0, 5.0),
-                  child: FFButtonWidget(
-                    onPressed: () async {
-                      context.safePop();
-                    },
-                    text: '',
-                    icon: Icon(
-                      Icons.chevron_left_rounded,
-                      size: 15.0,
+                FFButtonWidget(
+                  onPressed: () async {
+                    context.safePop();
+                  },
+                  text: '',
+                  icon: Icon(
+                    Icons.chevron_left_rounded,
+                    size: 15.0,
+                  ),
+                  options: FFButtonOptions(
+                    height: 40.0,
+                    padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                    iconPadding:
+                        EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                    color: FlutterFlowTheme.of(context).primary,
+                    textStyle: FlutterFlowTheme.of(context).titleSmall.override(
+                          fontFamily: 'Readex Pro',
+                          color: Colors.white,
+                        ),
+                    elevation: 3.0,
+                    borderSide: BorderSide(
+                      color: Colors.transparent,
+                      width: 0.0,
                     ),
-                    options: FFButtonOptions(
-                      height: 40.0,
-                      padding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                      iconPadding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                      color: FlutterFlowTheme.of(context).primary,
-                      textStyle:
-                          FlutterFlowTheme.of(context).titleSmall.override(
-                                fontFamily: 'Readex Pro',
-                                color: Colors.white,
-                              ),
-                      elevation: 3.0,
-                      borderSide: BorderSide(
-                        color: Colors.transparent,
-                        width: 0.0,
-                      ),
-                      borderRadius: BorderRadius.circular(8.0),
-                    ),
+                    borderRadius: BorderRadius.circular(8.0),
                   ),
                 ),
                 Text(
@@ -97,14 +95,15 @@ class _CharacterViewWidgetState extends State<CharacterViewWidget> {
                         fontFamily: 'Outfit',
                         color: Colors.white,
                         fontSize: 22.0,
+                        fontWeight: FontWeight.bold,
                       ),
                 ),
               ],
             ),
-            actions: [],
-            centerTitle: false,
-            elevation: 2.0,
           ),
+          actions: [],
+          centerTitle: false,
+          elevation: 2.0,
         ),
         body: SafeArea(
           top: true,
@@ -462,7 +461,7 @@ class _CharacterViewWidgetState extends State<CharacterViewWidget> {
                           EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 20.0, 0.0),
                       child: Column(
                         mainAxisSize: MainAxisSize.max,
-                        crossAxisAlignment: CrossAxisAlignment.end,
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Padding(
                             padding: EdgeInsetsDirectional.fromSTEB(

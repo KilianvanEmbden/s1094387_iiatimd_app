@@ -4,7 +4,9 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:provider/provider.dart';
@@ -27,6 +29,13 @@ class _HomePageWidgetState extends State<HomePageWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => HomePageModel());
+
+    // On page load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      await queryUserCharactersRecordOnce(
+        singleRecord: true,
+      ).then((s) => s.firstOrNull);
+    });
 
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
@@ -201,8 +210,8 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                           child: Container(
                             width: double.infinity,
                             decoration: BoxDecoration(
-                              color: FlutterFlowTheme.of(context)
-                                  .secondaryBackground,
+                              color:
+                                  listViewUserCharactersRecord.characterColor,
                               boxShadow: [
                                 BoxShadow(
                                   blurRadius: 0.0,
@@ -233,8 +242,8 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                       width: 44.0,
                                       height: 44.0,
                                       decoration: BoxDecoration(
-                                        color: FlutterFlowTheme.of(context)
-                                            .primary,
+                                        color: listViewUserCharactersRecord
+                                            .characterColor,
                                         image: DecorationImage(
                                           fit: BoxFit.cover,
                                           image: Image.network(
@@ -245,6 +254,17 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                         shape: BoxShape.circle,
                                       ),
                                       alignment: AlignmentDirectional(0.0, 0.0),
+                                      child: ClipRRect(
+                                        borderRadius:
+                                            BorderRadius.circular(8.0),
+                                        child: Image.network(
+                                          listViewUserCharactersRecord
+                                              .characterImg,
+                                          width: 300.0,
+                                          height: 200.0,
+                                          fit: BoxFit.cover,
+                                        ),
+                                      ),
                                     ),
                                   ),
                                   Expanded(
@@ -293,6 +313,8 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                       characterIntelligence: 10,
                       characterWisdom: 10,
                       characterCharisma: 10,
+                      characterImg: '',
+                      characterColor: Color(0xFF3225AA),
                     ));
                     _model.createDefaultCharacter =
                         UserCharactersRecord.getDocumentFromData(
@@ -307,6 +329,8 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                               characterIntelligence: 10,
                               characterWisdom: 10,
                               characterCharisma: 10,
+                              characterImg: '',
+                              characterColor: Color(0xFF3225AA),
                             ),
                             userCharactersRecordReference);
 
