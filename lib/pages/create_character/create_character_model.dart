@@ -32,20 +32,18 @@ class CreateCharacterModel extends FlutterFlowModel {
   // State field(s) for CharClass widget.
   String? charClassValue;
   FormFieldController<String>? charClassValueController;
-  // State field(s) for CountController widget.
-  int? countControllerValue1;
-  // State field(s) for CountController widget.
-  int? countControllerValue2;
-  // State field(s) for CountController widget.
-  int? countControllerValue3;
-  // State field(s) for CountController widget.
-  int? countControllerValue4;
-  // State field(s) for CountController widget.
-  int? countControllerValue5;
-  // State field(s) for CountController widget.
-  int? countControllerValue6;
-  // Stores action output result for [Backend Call - Create Document] action in Button widget.
-  UserCharactersRecord? storeCharacter;
+  // State field(s) for CharStr widget.
+  int? charStrValue;
+  // State field(s) for CharDex widget.
+  int? charDexValue;
+  // State field(s) for CharCon widget.
+  int? charConValue;
+  // State field(s) for CharInt widget.
+  int? charIntValue;
+  // State field(s) for CharWis widget.
+  int? charWisValue;
+  // State field(s) for CharCha widget.
+  int? charChaValue;
 
   /// Initialization and disposal methods.
 

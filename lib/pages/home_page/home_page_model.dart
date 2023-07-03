@@ -3,6 +3,7 @@ import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
@@ -16,6 +17,9 @@ class HomePageModel extends FlutterFlowModel {
   PagingController<DocumentSnapshot?, UserCharactersRecord>? pagingController;
   Query? pagingQuery;
   List<StreamSubscription?> streamSubscriptions = [];
+
+  // Stores action output result for [Backend Call - Create Document] action in Button widget.
+  UserCharactersRecord? createDefaultCharacter;
 
   /// Initialization and disposal methods.
 

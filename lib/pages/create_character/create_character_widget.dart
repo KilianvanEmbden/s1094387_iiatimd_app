@@ -18,7 +18,12 @@ import 'create_character_model.dart';
 export 'create_character_model.dart';
 
 class CreateCharacterWidget extends StatefulWidget {
-  const CreateCharacterWidget({Key? key}) : super(key: key);
+  const CreateCharacterWidget({
+    Key? key,
+    required this.character,
+  }) : super(key: key);
+
+  final UserCharactersRecord? character;
 
   @override
   _CreateCharacterWidgetState createState() => _CreateCharacterWidgetState();
@@ -34,7 +39,8 @@ class _CreateCharacterWidgetState extends State<CreateCharacterWidget> {
     super.initState();
     _model = createModel(context, () => CreateCharacterModel());
 
-    _model.charNameController ??= TextEditingController();
+    _model.charNameController ??=
+        TextEditingController(text: widget.character!.characterName);
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
@@ -168,8 +174,8 @@ class _CreateCharacterWidgetState extends State<CreateCharacterWidget> {
                           }
                         },
                         child: Container(
-                          width: 100.0,
-                          height: 100.0,
+                          width: 70.0,
+                          height: 70.0,
                           decoration: BoxDecoration(
                             color: Color(0xFFDBE2E7),
                             shape: BoxShape.circle,
@@ -178,8 +184,8 @@ class _CreateCharacterWidgetState extends State<CreateCharacterWidget> {
                             padding: EdgeInsetsDirectional.fromSTEB(
                                 2.0, 2.0, 2.0, 2.0),
                             child: Container(
-                              width: 40.0,
-                              height: 40.0,
+                              width: 35.0,
+                              height: 35.0,
                               clipBehavior: Clip.antiAlias,
                               decoration: BoxDecoration(
                                 shape: BoxShape.circle,
@@ -206,8 +212,8 @@ class _CreateCharacterWidgetState extends State<CreateCharacterWidget> {
                         textCapitalization: TextCapitalization.words,
                         obscureText: false,
                         decoration: InputDecoration(
-                          labelText: 'Character Name',
                           labelStyle: FlutterFlowTheme.of(context).labelMedium,
+                          hintText: 'Select Name',
                           hintStyle: FlutterFlowTheme.of(context).labelMedium,
                           enabledBorder: OutlineInputBorder(
                             borderSide: BorderSide(
@@ -253,7 +259,10 @@ class _CreateCharacterWidgetState extends State<CreateCharacterWidget> {
                           EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 20.0, 5.0),
                       child: FlutterFlowDropDown<String>(
                         controller: _model.charRaceValueController ??=
-                            FormFieldController<String>(null),
+                            FormFieldController<String>(
+                          _model.charRaceValue ??=
+                              widget.character!.characterRace,
+                        ),
                         options: [
                           'Dragonborn',
                           'Dwarf',
@@ -295,7 +304,10 @@ class _CreateCharacterWidgetState extends State<CreateCharacterWidget> {
                             20.0, 0.0, 20.0, 5.0),
                         child: FlutterFlowDropDown<String>(
                           controller: _model.charClassValueController ??=
-                              FormFieldController<String>(null),
+                              FormFieldController<String>(
+                            _model.charClassValue ??=
+                                widget.character!.characterClass,
+                          ),
                           options: [
                             'Barbarian',
                             'Bard',
@@ -405,10 +417,13 @@ class _CreateCharacterWidgetState extends State<CreateCharacterWidget> {
                                         style: FlutterFlowTheme.of(context)
                                             .titleLarge,
                                       ),
-                                      count: _model.countControllerValue1 ??=
-                                          10,
-                                      updateCount: (count) => setState(() =>
-                                          _model.countControllerValue1 = count),
+                                      count: _model.charStrValue ??=
+                                          valueOrDefault<int>(
+                                        widget.character!.characterStrength,
+                                        10,
+                                      ),
+                                      updateCount: (count) => setState(
+                                          () => _model.charStrValue = count),
                                       stepSize: 1,
                                       minimum: 0,
                                       maximum: 50,
@@ -491,10 +506,13 @@ class _CreateCharacterWidgetState extends State<CreateCharacterWidget> {
                                         style: FlutterFlowTheme.of(context)
                                             .titleLarge,
                                       ),
-                                      count: _model.countControllerValue2 ??=
-                                          10,
-                                      updateCount: (count) => setState(() =>
-                                          _model.countControllerValue2 = count),
+                                      count: _model.charDexValue ??=
+                                          valueOrDefault<int>(
+                                        widget.character!.characterDexterity,
+                                        10,
+                                      ),
+                                      updateCount: (count) => setState(
+                                          () => _model.charDexValue = count),
                                       stepSize: 1,
                                       minimum: 0,
                                       maximum: 50,
@@ -577,10 +595,13 @@ class _CreateCharacterWidgetState extends State<CreateCharacterWidget> {
                                         style: FlutterFlowTheme.of(context)
                                             .titleLarge,
                                       ),
-                                      count: _model.countControllerValue3 ??=
-                                          10,
-                                      updateCount: (count) => setState(() =>
-                                          _model.countControllerValue3 = count),
+                                      count: _model.charConValue ??=
+                                          valueOrDefault<int>(
+                                        widget.character!.characterConstitution,
+                                        10,
+                                      ),
+                                      updateCount: (count) => setState(
+                                          () => _model.charConValue = count),
                                       stepSize: 1,
                                       minimum: 0,
                                       maximum: 50,
@@ -663,10 +684,13 @@ class _CreateCharacterWidgetState extends State<CreateCharacterWidget> {
                                         style: FlutterFlowTheme.of(context)
                                             .titleLarge,
                                       ),
-                                      count: _model.countControllerValue4 ??=
-                                          10,
-                                      updateCount: (count) => setState(() =>
-                                          _model.countControllerValue4 = count),
+                                      count: _model.charIntValue ??=
+                                          valueOrDefault<int>(
+                                        widget.character!.characterIntelligence,
+                                        10,
+                                      ),
+                                      updateCount: (count) => setState(
+                                          () => _model.charIntValue = count),
                                       stepSize: 1,
                                       minimum: 0,
                                       maximum: 50,
@@ -749,10 +773,13 @@ class _CreateCharacterWidgetState extends State<CreateCharacterWidget> {
                                         style: FlutterFlowTheme.of(context)
                                             .titleLarge,
                                       ),
-                                      count: _model.countControllerValue5 ??=
-                                          10,
-                                      updateCount: (count) => setState(() =>
-                                          _model.countControllerValue5 = count),
+                                      count: _model.charWisValue ??=
+                                          valueOrDefault<int>(
+                                        widget.character!.characterWisdom,
+                                        10,
+                                      ),
+                                      updateCount: (count) => setState(
+                                          () => _model.charWisValue = count),
                                       stepSize: 1,
                                       minimum: 0,
                                       maximum: 50,
@@ -835,10 +862,13 @@ class _CreateCharacterWidgetState extends State<CreateCharacterWidget> {
                                         style: FlutterFlowTheme.of(context)
                                             .titleLarge,
                                       ),
-                                      count: _model.countControllerValue6 ??=
-                                          10,
-                                      updateCount: (count) => setState(() =>
-                                          _model.countControllerValue6 = count),
+                                      count: _model.charChaValue ??=
+                                          valueOrDefault<int>(
+                                        widget.character!.characterCharisma,
+                                        10,
+                                      ),
+                                      updateCount: (count) => setState(
+                                          () => _model.charChaValue = count),
                                       stepSize: 1,
                                       minimum: 0,
                                       maximum: 50,
@@ -858,48 +888,20 @@ class _CreateCharacterWidgetState extends State<CreateCharacterWidget> {
                             0.0, 24.0, 0.0, 10.0),
                         child: FFButtonWidget(
                           onPressed: () async {
-                            var userCharactersRecordReference =
-                                UserCharactersRecord.createDoc(
-                                    currentUserReference!);
-                            await userCharactersRecordReference
-                                .set(createUserCharactersRecordData(
+                            await widget.character!.reference
+                                .update(createUserCharactersRecordData(
                               uid: currentUserUid,
                               characterName: _model.charNameController.text,
                               characterRace: _model.charRaceValue,
                               characterClass: _model.charClassValue,
-                              characterStrength: _model.countControllerValue1,
-                              characterDexterity: _model.countControllerValue2,
-                              characterConstitution:
-                                  _model.countControllerValue3,
-                              characterIntelligence:
-                                  _model.countControllerValue4,
-                              characterWisdom: _model.countControllerValue5,
-                              characterCharisma: _model.countControllerValue6,
+                              characterStrength: _model.charStrValue,
+                              characterDexterity: _model.charDexValue,
+                              characterConstitution: _model.charConValue,
+                              characterIntelligence: _model.charIntValue,
+                              characterWisdom: _model.charWisValue,
+                              characterCharisma: _model.charWisValue,
                               characterImg: _model.uploadedFileUrl,
                             ));
-                            _model.storeCharacter =
-                                UserCharactersRecord.getDocumentFromData(
-                                    createUserCharactersRecordData(
-                                      uid: currentUserUid,
-                                      characterName:
-                                          _model.charNameController.text,
-                                      characterRace: _model.charRaceValue,
-                                      characterClass: _model.charClassValue,
-                                      characterStrength:
-                                          _model.countControllerValue1,
-                                      characterDexterity:
-                                          _model.countControllerValue2,
-                                      characterConstitution:
-                                          _model.countControllerValue3,
-                                      characterIntelligence:
-                                          _model.countControllerValue4,
-                                      characterWisdom:
-                                          _model.countControllerValue5,
-                                      characterCharisma:
-                                          _model.countControllerValue6,
-                                      characterImg: _model.uploadedFileUrl,
-                                    ),
-                                    userCharactersRecordReference);
 
                             context.goNamed(
                               'HomePage',
@@ -911,8 +913,6 @@ class _CreateCharacterWidgetState extends State<CreateCharacterWidget> {
                                 ),
                               },
                             );
-
-                            setState(() {});
                           },
                           text: 'Save Changes',
                           options: FFButtonOptions(

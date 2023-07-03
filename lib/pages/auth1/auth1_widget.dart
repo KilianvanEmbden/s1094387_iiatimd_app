@@ -215,7 +215,7 @@ class _Auth1WidgetState extends State<Auth1Widget>
                                               .displaySmall
                                               .override(
                                                 fontFamily: 'Outfit',
-                                                color: _model.signIn == false
+                                                color: _model.signIn != false
                                                     ? FlutterFlowTheme.of(
                                                             context)
                                                         .primaryText
@@ -245,7 +245,7 @@ class _Auth1WidgetState extends State<Auth1Widget>
                                               .displaySmall
                                               .override(
                                                 fontFamily: 'Outfit',
-                                                color: _model.signIn == true
+                                                color: _model.signIn == false
                                                     ? FlutterFlowTheme.of(
                                                             context)
                                                         .primaryText
@@ -548,7 +548,8 @@ class _Auth1WidgetState extends State<Auth1Widget>
                                                       0.0, 0.0, 0.0, 16.0),
                                               child: FFButtonWidget(
                                                 onPressed: () {
-                                                  print('Button pressed ...');
+                                                  print(
+                                                      'ForgotpswButton pressed ...');
                                                 },
                                                 text: 'Forgot Password',
                                                 options: FFButtonOptions(

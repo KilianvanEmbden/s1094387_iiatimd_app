@@ -3,6 +3,7 @@ import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
@@ -278,7 +279,51 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                 padding: EdgeInsetsDirectional.fromSTEB(0.0, 12.0, 0.0, 0.0),
                 child: FFButtonWidget(
                   onPressed: () async {
-                    context.pushNamed('createCharacter');
+                    var userCharactersRecordReference =
+                        UserCharactersRecord.createDoc(currentUserReference!);
+                    await userCharactersRecordReference
+                        .set(createUserCharactersRecordData(
+                      uid: currentUserUid,
+                      characterName: '',
+                      characterRace: '',
+                      characterClass: '',
+                      characterStrength: 10,
+                      characterDexterity: 10,
+                      characterConstitution: 10,
+                      characterIntelligence: 10,
+                      characterWisdom: 10,
+                      characterCharisma: 10,
+                    ));
+                    _model.createDefaultCharacter =
+                        UserCharactersRecord.getDocumentFromData(
+                            createUserCharactersRecordData(
+                              uid: currentUserUid,
+                              characterName: '',
+                              characterRace: '',
+                              characterClass: '',
+                              characterStrength: 10,
+                              characterDexterity: 10,
+                              characterConstitution: 10,
+                              characterIntelligence: 10,
+                              characterWisdom: 10,
+                              characterCharisma: 10,
+                            ),
+                            userCharactersRecordReference);
+
+                    context.pushNamed(
+                      'createCharacter',
+                      queryParameters: {
+                        'character': serializeParam(
+                          _model.createDefaultCharacter,
+                          ParamType.Document,
+                        ),
+                      }.withoutNulls,
+                      extra: <String, dynamic>{
+                        'character': _model.createDefaultCharacter,
+                      },
+                    );
+
+                    setState(() {});
                   },
                   text: 'Make a chracter',
                   options: FFButtonOptions(

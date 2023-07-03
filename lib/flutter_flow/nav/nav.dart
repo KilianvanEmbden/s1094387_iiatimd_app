@@ -98,7 +98,13 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'createCharacter',
           path: '/createCharacter',
-          builder: (context, params) => CreateCharacterWidget(),
+          asyncParams: {
+            'character': getDoc(
+                ['users', 'userCharacters'], UserCharactersRecord.fromSnapshot),
+          },
+          builder: (context, params) => CreateCharacterWidget(
+            character: params.getParam('character', ParamType.Document),
+          ),
         ),
         FFRoute(
           name: 'characterView',
