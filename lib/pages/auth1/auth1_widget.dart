@@ -3,7 +3,6 @@ import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
@@ -1007,32 +1006,6 @@ class _Auth1WidgetState extends State<Auth1Widget>
                   ),
                 ),
               ),
-              if (responsiveVisibility(
-                context: context,
-                phone: false,
-                tablet: false,
-              ))
-                Expanded(
-                  flex: 6,
-                  child: Padding(
-                    padding:
-                        EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 16.0),
-                    child: Container(
-                      width: 100.0,
-                      height: double.infinity,
-                      decoration: BoxDecoration(
-                        color: FlutterFlowTheme.of(context).secondaryBackground,
-                        image: DecorationImage(
-                          fit: BoxFit.cover,
-                          image: CachedNetworkImageProvider(
-                            'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/f-f-games-660ryh/assets/41gtlg4nnch2/demoProject@2x.jpg',
-                          ),
-                        ),
-                        borderRadius: BorderRadius.circular(16.0),
-                      ),
-                    ),
-                  ),
-                ),
             ],
           ),
         ),
